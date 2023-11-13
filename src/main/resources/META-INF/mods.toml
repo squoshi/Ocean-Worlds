@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="Apache-2.0"
+[[mods]]
+modId="oceanworlds"
+version="${file.jarVersion}"
+displayName="Ocean Worlds"
+updateJSONURL="https://infernalstudios.org/api/mods/oceanworlds/forge"
+logoFile="Ocean_Worlds_Banner.png"
+authors="Infernal Studios"
+description='''
+Ocean Worlds is a mod that raises the ocean level!
+
+Credits
+LudoCrypt - Developer
+'''
+[[dependencies.oceanworlds]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.oceanworlds]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18,)"
+    ordering="NONE"
+    side="BOTH"
