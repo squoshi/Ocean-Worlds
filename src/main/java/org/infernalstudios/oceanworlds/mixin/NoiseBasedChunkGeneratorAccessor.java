@@ -1,4 +1,4 @@
-package org.infernalstudios.oceanworlds.merxmixin;
+package org.infernalstudios.oceanworlds.mixin;
 
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;

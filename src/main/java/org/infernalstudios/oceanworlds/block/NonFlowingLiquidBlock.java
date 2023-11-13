@@ -21,20 +21,14 @@ public class NonFlowingLiquidBlock extends LiquidBlock {
 	}
 
 	@Override
-	public void onPlace(BlockState p_54754_, Level p_54755_, BlockPos p_54756_, BlockState p_54757_, boolean p_54758_) {
-	}
+	public void onPlace(BlockState p_54754_, Level p_54755_, BlockPos p_54756_, BlockState p_54757_, boolean p_54758_) {}
 
 	@Override
 	public BlockState updateShape(BlockState p_54723_, Direction p_54724_, BlockState p_54725_, LevelAccessor p_54726_, BlockPos p_54727_, BlockPos p_54728_) {
-		/*
-		 * return p_54726_.getBlockState(p_54728_).is(fallback) ?
-		 * fallback.withPropertiesOf(p_54723_) : p_54723_;
-		 */
 		return p_54723_;
 	}
 
 	@Override
-	public void neighborChanged(BlockState p_54709_, Level p_54710_, BlockPos p_54711_, Block p_54712_, BlockPos p_54713_, boolean p_54714_) {
-	}
+	public void neighborChanged(BlockState p_54709_, Level p_54710_, BlockPos p_54711_, Block p_54712_, BlockPos p_54713_, boolean p_54714_) {}
 
 }

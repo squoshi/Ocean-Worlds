@@ -1,4 +1,4 @@
-package org.infernalstudios.oceanworlds.merxmixin;
+package org.infernalstudios.oceanworlds.mixin;
 
 import org.infernalstudios.oceanworlds.OceanWorlds;
 import org.spongepowered.asm.mixin.Mixin;

@@ -5,8 +5,14 @@
 	"refmap": "oceanworlds.refmap.json",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
+		"BoatMixin",
+		"ChunkStatusMixin",
+		"FlowingFluidAccessor",
+		"LiquidBlockMixin",
+		"NoiseBasedChunkGeneratorAccessor"
 	],
 	"client": [
+		"BiomeColorsMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
