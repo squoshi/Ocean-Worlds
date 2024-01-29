@@ -44,8 +44,8 @@ public class OceanWorldsOptions {
 		builder.comment("Ocean Worlds");
 		oceanHeight = builder.comment("Ocean Height").define("oceanworlds.height.ocean", 63);
 		oceanScale = builder.comment("Ocean Scale").define("oceanworlds.scale.ocean", 1);
-		oceanLavaHeight = builder.comment("Lava Ocean Height").define("oceanworlds.height.lava", 63);
-		oceanLavaScale = builder.comment("Lava Ocean Scale").define("oceanworlds.scale.lava", 1);
+		oceanLavaHeight = builder.comment("Lava Ocean Height").define("oceanworlds.height.lava", 32);
+		oceanLavaScale = builder.comment("Lava Ocean Scale").define("oceanworlds.scale.lava", 10);
 
 		GeneralSettings.config(builder);
 		FractalSettings.config(builder);
