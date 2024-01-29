@@ -1,2 +1,5 @@
 {
+    "block.oceanworlds.false_water": "Flowing Water",
+    "block.oceanworlds.false_lava": "Flowing Lava",
+    "block.oceanworlds.full_water": "Water"
 }

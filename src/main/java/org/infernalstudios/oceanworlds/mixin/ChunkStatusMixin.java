@@ -41,31 +41,40 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 public class ChunkStatusMixin {
 
 	@Inject(method = "lambda$static$12(Lnet/minecraft/world/level/chunk/ChunkStatus;Ljava/util/concurrent/Executor;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/ChunkGenerator;Lnet/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplateManager;Lnet/minecraft/server/level/ThreadedLevelLightEngine;Ljava/util/function/Function;Ljava/util/List;Lnet/minecraft/world/level/chunk/ChunkAccess;Z)Ljava/util/concurrent/CompletableFuture;", at = @At(value = "RETURN", shift = Shift.BEFORE))
-	private static void oceanWorlds$features(ChunkStatus chunkStatus, Executor executor, ServerLevel level, ChunkGenerator chunkGenerator, StructureTemplateManager structureManager,
-			ThreadedLevelLightEngine lightLevelEngine, Function<ChunkAccess, CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>>> f, List<ChunkAccess> chunks, ChunkAccess chunk,
-			boolean b, CallbackInfoReturnable<CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>>> ci) {
+	private static void oceanWorlds$features(ChunkStatus chunkStatus, Executor executor, ServerLevel level,
+			ChunkGenerator chunkGenerator, StructureTemplateManager structureManager,
+			ThreadedLevelLightEngine lightLevelEngine,
+			Function<ChunkAccess, CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>>> f,
+			List<ChunkAccess> chunks, ChunkAccess chunk, boolean b,
+			CallbackInfoReturnable<CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>>> ci) {
 
 		if (chunkGenerator instanceof NoiseBasedChunkGeneratorAccessor noiseChunkGenerator) {
 
 			if (noiseChunkGenerator.getSettings().value().defaultFluid().getBlock() instanceof LiquidBlock liquid) {
 
 				if (level.dimension().equals(Level.OVERWORLD) || level.dimension().equals(Level.NETHER)) {
-					int height = OceanWorldsOptions.getOceanHeight();
-					int scale = OceanWorldsOptions.getOceanScale();
 					BlockState defaultFluid = noiseChunkGenerator.getSettings().value().defaultFluid();
+					int height = !defaultFluid.is(Blocks.WATER) ? OceanWorldsOptions.getOceanLavaHeight()
+							: OceanWorldsOptions.getOceanHeight();
+					int scale = !defaultFluid.is(Blocks.WATER) ? OceanWorldsOptions.getOceanLavaScale()
+							: OceanWorldsOptions.getOceanScale();
 					WorldGenRegion worldgenregion = new WorldGenRegion(level, chunks, chunkStatus, 1);
-					FastNoiseSampler noise = new FastNoiseSampler(GeneralSettings.get(), FractalSettings.get(), CellularSettings.get(), DomainWarpSettings.get(), DomainWarpFractalSettings.get());
+					FastNoiseSampler noise = new FastNoiseSampler(GeneralSettings.get(), FractalSettings.get(),
+						CellularSettings.get(), DomainWarpSettings.get(), DomainWarpFractalSettings.get());
 
 					for (int x = 0; x < 16; x++) {
 
 						for (int z = 0; z < 16; z++) {
 							BlockPos noisePos = chunk.getPos().getWorldPosition().offset(x, 0, z);
-							double extra = (noise.GetNoise(noisePos.getX(), noisePos.getZ(), worldgenregion.getSeed() ^ ~2) + 1) * scale;
+							double extra = (noise
+								.GetNoise(noisePos.getX(), noisePos.getZ(), worldgenregion.getSeed() ^ ~2) + 1) * scale;
 
 							for (int y = chunk.getMinBuildHeight(); y <= height + (int) Math.ceil(extra); y++) {
 								BlockPos pos = noisePos.above(y);
 								BlockState state = worldgenregion.getBlockState(pos);
-								BlockState fluid = defaultFluid.is(Blocks.WATER) ? OceanWorlds.FALSE_WATER.get().defaultBlockState() : OceanWorlds.FALSE_LAVA.get().defaultBlockState();
+								BlockState fluid = defaultFluid.is(Blocks.WATER)
+										? OceanWorlds.FALSE_WATER.get().defaultBlockState()
+										: OceanWorlds.FALSE_LAVA.get().defaultBlockState();
 
 								if ((y + 1) > height + Math.ceil(extra)) {
 									int val = 8 - (int) Math.floor((extra % 1) * 8.0D);
@@ -78,11 +87,15 @@ public class ChunkStatusMixin {
 
 								}
 
-								if (state.is(Blocks.AIR) || ((FlowingFluidAccessor) liquid.getFluid()).callCanHoldFluid(worldgenregion, pos, state, liquid.getFluid())
-										|| state.is(defaultFluid.getBlock())) {
+								if (state.is(Blocks.AIR) || ((FlowingFluidAccessor) liquid.getFluid())
+									.callCanHoldFluid(worldgenregion, pos, state,
+										liquid.getFluid()) || state.is(defaultFluid.getBlock())) {
 									worldgenregion.setBlock(pos, fluid, Block.UPDATE_NONE, 0);
-								} else if (state.hasProperty(BlockStateProperties.WATERLOGGED)) {
-									worldgenregion.setBlock(pos, state.setValue(BlockStateProperties.WATERLOGGED, true), Block.UPDATE_NONE, 0);
+								} else if (state.hasProperty(BlockStateProperties.WATERLOGGED) && defaultFluid
+									.is(Blocks.WATER)) {
+									worldgenregion
+										.setBlock(pos, state.setValue(BlockStateProperties.WATERLOGGED, true),
+											Block.UPDATE_NONE, 0);
 								}
 
 							}

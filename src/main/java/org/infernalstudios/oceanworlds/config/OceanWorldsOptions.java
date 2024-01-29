@@ -36,12 +36,16 @@ public class OceanWorldsOptions {
 	private static final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 	private static ConfigValue<Integer> oceanHeight;
 	private static ConfigValue<Integer> oceanScale;
+	private static ConfigValue<Integer> oceanLavaHeight;
+	private static ConfigValue<Integer> oceanLavaScale;
 	private static ForgeConfigSpec config;
 
 	public static void init() {
 		builder.comment("Ocean Worlds");
 		oceanHeight = builder.comment("Ocean Height").define("oceanworlds.height.ocean", 63);
 		oceanScale = builder.comment("Ocean Scale").define("oceanworlds.scale.ocean", 1);
+		oceanLavaHeight = builder.comment("Lava Ocean Height").define("oceanworlds.height.lava", 63);
+		oceanLavaScale = builder.comment("Lava Ocean Scale").define("oceanworlds.scale.lava", 1);
 
 		GeneralSettings.config(builder);
 		FractalSettings.config(builder);
@@ -53,7 +57,12 @@ public class OceanWorldsOptions {
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, OceanWorldsOptions.config);
 
-		CommentedFileConfig file = CommentedFileConfig.builder(new File(FMLPaths.CONFIGDIR.get().resolve("oceanworlds.toml").toString())).sync().autosave().writingMode(WritingMode.REPLACE).build();
+		CommentedFileConfig file = CommentedFileConfig
+			.builder(new File(FMLPaths.CONFIGDIR.get().resolve("oceanworlds.toml").toString()))
+			.sync()
+			.autosave()
+			.writingMode(WritingMode.REPLACE)
+			.build();
 		file.load();
 		config.setConfig(file);
 	}
@@ -64,6 +73,14 @@ public class OceanWorldsOptions {
 
 	public static int getOceanScale() {
 		return oceanScale.get();
+	}
+
+	public static int getOceanLavaHeight() {
+		return oceanLavaHeight.get();
+	}
+
+	public static int getOceanLavaScale() {
+		return oceanLavaScale.get();
 	}
 
 }
