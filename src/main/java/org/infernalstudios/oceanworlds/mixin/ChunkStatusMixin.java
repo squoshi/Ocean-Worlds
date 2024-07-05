@@ -40,13 +40,13 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 @Mixin(ChunkStatus.class)
 public class ChunkStatusMixin {
 
-	@Inject(method = "lambda$static$12(Lnet/minecraft/world/level/chunk/ChunkStatus;Ljava/util/concurrent/Executor;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/ChunkGenerator;Lnet/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplateManager;Lnet/minecraft/server/level/ThreadedLevelLightEngine;Ljava/util/function/Function;Ljava/util/List;Lnet/minecraft/world/level/chunk/ChunkAccess;Z)Ljava/util/concurrent/CompletableFuture;", at = @At(value = "RETURN", shift = Shift.BEFORE))
+	@Inject(method = "lambda$static$12", at = @At(value = "RETURN", shift = Shift.BEFORE))
 	private static void oceanWorlds$features(ChunkStatus chunkStatus, Executor executor, ServerLevel level,
-			ChunkGenerator chunkGenerator, StructureTemplateManager structureManager,
-			ThreadedLevelLightEngine lightLevelEngine,
-			Function<ChunkAccess, CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>>> f,
-			List<ChunkAccess> chunks, ChunkAccess chunk, boolean b,
-			CallbackInfoReturnable<CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>>> ci) {
+											 ChunkGenerator chunkGenerator, StructureTemplateManager structureManager,
+											 ThreadedLevelLightEngine lightLevelEngine,
+											 Function f,
+											 List chunks, ChunkAccess chunk,
+											 CallbackInfoReturnable<CompletableFuture> ci) {
 
 		if (chunkGenerator instanceof NoiseBasedChunkGeneratorAccessor noiseChunkGenerator) {
 

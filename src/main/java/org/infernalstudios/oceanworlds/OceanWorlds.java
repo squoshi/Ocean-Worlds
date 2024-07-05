@@ -14,6 +14,7 @@
  */
 package org.infernalstudios.oceanworlds;
 
+import net.minecraft.client.resources.model.Material;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.infernalstudios.oceanworlds.block.FullWaterBlock;
@@ -25,7 +26,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -40,20 +40,20 @@ public class OceanWorlds {
 	public static final Logger LOGGER = LogManager.getLogger(NAME);
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
 	public static final RegistryObject<Block> FALSE_WATER = BLOCKS.register("false_water",
-			() -> new NonFlowingLiquidBlock(() -> Fluids.WATER, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noLootTable(), Blocks.WATER));
+			() -> new NonFlowingLiquidBlock(() -> Fluids.WATER, BlockBehaviour.Properties.of().noCollission().strength(100.0F).noLootTable(), Blocks.WATER));
 	public static final RegistryObject<Block> FALSE_LAVA = BLOCKS.register("false_lava", () -> new NonFlowingLiquidBlock(() -> Fluids.LAVA,
-			BlockBehaviour.Properties.of(Material.LAVA).noCollission().randomTicks().strength(100.0F).lightLevel((p_50755_) -> 15).noLootTable(), Blocks.LAVA));
+			BlockBehaviour.Properties.of().noCollission().randomTicks().strength(100.0F).lightLevel((p_50755_) -> 15).noLootTable(), Blocks.LAVA));
 	public static final RegistryObject<Block> FULL_WATER = BLOCKS.register("full_water",
-			() -> new FullWaterBlock(() -> Fluids.WATER, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noLootTable(), Blocks.WATER));
+			() -> new FullWaterBlock(() -> Fluids.WATER, BlockBehaviour.Properties.of().noCollission().strength(100.0F).noLootTable(), Blocks.WATER));
 
 	public OceanWorlds() {
 		OceanWorldsOptions.init();
 
 		for (DyeColor dye : DyeColor.values()) {
 			BLOCKS.register(dye.getName() + "_false_water",
-					() -> new NonFlowingLiquidBlock(() -> Fluids.WATER, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noLootTable(), Blocks.WATER));
+					() -> new NonFlowingLiquidBlock(() -> Fluids.WATER, BlockBehaviour.Properties.of().noCollission().strength(100.0F).noLootTable(), Blocks.WATER));
 			BLOCKS.register(dye.getName() + "_full_water",
-					() -> new FullWaterBlock(() -> Fluids.WATER, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noLootTable(), Blocks.WATER));
+					() -> new FullWaterBlock(() -> Fluids.WATER, BlockBehaviour.Properties.of().noCollission().strength(100.0F).noLootTable(), Blocks.WATER));
 		}
 
 		BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());

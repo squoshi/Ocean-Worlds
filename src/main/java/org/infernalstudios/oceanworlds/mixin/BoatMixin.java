@@ -87,9 +87,9 @@ public abstract class BoatMixin extends Entity {
 				for (int l1 = k; l1 < l; ++l1) {
 					for (int i2 = i1; i2 < j1; ++i2) {
 						blockpos$mutableblockpos.set(k1, l1, i2);
-						FluidState fluidstate = this.level.getFluidState(blockpos$mutableblockpos);
+						FluidState fluidstate = this.level().getFluidState(blockpos$mutableblockpos);
 						if (fluidstate.is(FluidTags.WATER)) {
-							float f = (float) l1 + fluidstate.getHeight(this.level, blockpos$mutableblockpos);
+							float f = (float) l1 + fluidstate.getHeight(this.level(), blockpos$mutableblockpos);
 							this.waterLevel = Math.max((double) f, this.waterLevel);
 						}
 					}

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[36,)"
+loaderVersion="[47,)"
 license="Apache-2.0"
 [[mods]]
 modId="oceanworlds"
@@ -14,18 +14,19 @@ Ocean Worlds is a mod that raises the ocean level!
 Credits
 LudoCrypt - Developer
 nekomaster1000 - Banner Artist
+tinytransfem - Maintainer
 
 Thank you to our Patrons for the support!
 '''
 [[dependencies.oceanworlds]]
     modId="forge"
     mandatory=true
-    versionRange="[36,)"
+    versionRange="[47,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.oceanworlds]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18,)"
+    versionRange="[1.20,)"
     ordering="NONE"
     side="BOTH"
