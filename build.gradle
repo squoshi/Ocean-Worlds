@@ -78,12 +78,12 @@ dependencies {
 jar {
   manifest {
     attributes([
-      'Specification-Title'   : config.TITLE,
-      'Specification-Vendor'  : config.AUTHOR,
-      'Specification-Version' : '1',
-      'Implementation-Title'  : config.TITLE,
-      'Implementation-Version': config.VERSION,
-      'Implementation-Vendor' : config.AUTHOR
+            'Specification-Title'   : config.TITLE,
+            'Specification-Vendor'  : config.AUTHOR,
+            'Specification-Version' : '1',
+            'Implementation-Title'  : config.TITLE,
+            'Implementation-Version': config.VERSION,
+            'Implementation-Vendor' : config.AUTHOR
     ])
   }
 }
@@ -123,12 +123,12 @@ publishing {
     maven {
       url config.MAVEN_URL
 
-      
+
       credentials {
         username = System.getenv('MAVEN_USER')
         password = System.getenv('MAVEN_TOKEN')
       }
-      
+
       authentication {
         basic(BasicAuthentication)
       }
@@ -166,7 +166,7 @@ tasks.curseforge.configure {
 // // Curseforge publishing
 // curseforge {
 //   apiKey = System.getenv('CURSEFORGE') ?: 'If you\'re seeing this, you haven\'t set your "CURSEFORGE" environment variable'
-  
+
 //   project {
 //     id = config.CURSEFORGE_ID
 //     changelog = 'No changelog specified.'
