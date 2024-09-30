@@ -5,7 +5,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Function;
 
+import net.minecraftforge.fml.ModList;
 import org.infernalstudios.oceanworlds.OceanWorlds;
+import org.infernalstudios.oceanworlds.compat.ValkyrienSkiesCompat;
 import org.infernalstudios.oceanworlds.config.FastNoiseSampler;
 import org.infernalstudios.oceanworlds.config.FastNoiseSampler.CellularSettings;
 import org.infernalstudios.oceanworlds.config.FastNoiseSampler.DomainWarpFractalSettings;
@@ -61,6 +63,12 @@ public class ChunkStatusMixin {
 					WorldGenRegion worldgenregion = new WorldGenRegion(level, chunks, chunkStatus, 1);
 					FastNoiseSampler noise = new FastNoiseSampler(GeneralSettings.get(), FractalSettings.get(),
 						CellularSettings.get(), DomainWarpSettings.get(), DomainWarpFractalSettings.get());
+
+					boolean fillChunk = true;
+					if (ModList.get().isLoaded("valkyrienskies")) {
+						fillChunk = ValkyrienSkiesCompat.shouldFillChunkWithWater(chunk, level);
+					}
+					if (!fillChunk) return;
 
 					for (int x = 0; x < 16; x++) {
 
